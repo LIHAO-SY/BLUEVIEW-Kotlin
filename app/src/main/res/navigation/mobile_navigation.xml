@@ -14,17 +14,17 @@
     <fragment
         android:id="@+id/navigation_control"
         android:name="com.blueview.led.ui.control.ControlFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_control"
         tools:layout="@layout/fragment_control" />
 
     <fragment
         android:id="@+id/navigation_map"
         android:name="com.blueview.led.ui.map.MapFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_map"
         tools:layout="@layout/fragment_map" />
     <fragment
         android:id="@+id/navigation_user"
-        android:name="com.blueview.led.ui.map.MapFragment"
-        android:label="@string/title_notifications"
+        android:name="com.blueview.led.ui.user.UserFragment"
+        android:label="@string/title_user"
         tools:layout="@layout/fragment_user" />
 </navigation>
