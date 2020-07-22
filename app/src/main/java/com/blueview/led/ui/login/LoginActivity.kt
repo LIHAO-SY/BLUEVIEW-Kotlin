@@ -14,11 +14,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.blueview.led.MainActivity
 
 import com.blueview.led.R
 
- class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var username:EditText
@@ -39,10 +40,7 @@ import com.blueview.led.R
         password = findViewById(R.id.password)
         login = findViewById(R.id.login)
         loading = findViewById(R.id.loading)
-
-        this.loginViewModel = ViewModelProviders.of(this, LoginViewModelFactory())
-                .get(LoginViewModel::class.java)
-
+        loginViewModel=ViewModelProvider(this,LoginViewModelFactory())[LoginViewModel::class.java]
         this.loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
             val loginState = it ?: return@Observer
 
