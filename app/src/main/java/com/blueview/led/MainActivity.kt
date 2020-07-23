@@ -32,12 +32,36 @@ class MainActivity : AppCompatActivity() {
         viewPager=findViewById(R.id.main_viewpager)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        fragmentPagerAdapter= MyAdapter(supportFragmentManager)
+        fragmentPagerAdapter= fragment_adapter(supportFragmentManager)
         viewPager.adapter=fragmentPagerAdapter
+
+        viewPager.addOnPageChangeListener(object:ViewPager.OnPageChangeListener{
+           override fun onPageScrollStateChanged(state: Int) {
+
+           }
+
+           override fun onPageScrolled(
+               position: Int,
+               positionOffset: Float,
+               positionOffsetPixels: Int
+           ) {
+
+           }
+
+           override fun onPageSelected(position: Int) {
+               if (menuItem!=null)
+               {
+                   menuItem.isChecked = false
+               }else{
+                   navView.menu.getItem(0).isChecked = false
+               }
+               menuItem=navView.menu.getItem(position).setChecked(true)
+
+           }
+       })
         navView.setOnNavigationItemSelectedListener(object :NavigationView.OnNavigationItemSelectedListener,
             BottomNavigationView.OnNavigationItemSelectedListener {
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
-                TODO("Not yet implemented")
                 menuItem=item
                 when(item.itemId)
                 {
@@ -50,37 +74,12 @@ class MainActivity : AppCompatActivity() {
                     R.id.navigation_user->
                         viewPager.setCurrentItem(3,true)
                 }
+                return false
             }
         })
-        viewPager.addOnPageChangeListener(object:ViewPager.OnPageChangeListener{
-           override fun onPageScrollStateChanged(state: Int) {
-               TODO("Not yet implemented")
-           }
-
-           override fun onPageScrolled(
-               position: Int,
-               positionOffset: Float,
-               positionOffsetPixels: Int
-           ) {
-               if (menuItem!=null)
-               {
-                   menuItem.setChecked(false)
-               }else{
-                   navView.menu.getItem(0).setChecked(false)
-               }
-               menuItem=navView.menu.getItem(position).setChecked(true)
-
-               TODO("Not yet implemented")
-           }
-
-           override fun onPageSelected(position: Int) {
-               TODO("Not yet implemented")
-           }
-       })
-
 
     }
-    class MyAdapter : FragmentPagerAdapter {
+    class fragment_adapter : FragmentPagerAdapter {
         var fragment_list: MutableList<Fragment> = ArrayList()
 
         constructor(fm: FragmentManager) : super(fm) {
