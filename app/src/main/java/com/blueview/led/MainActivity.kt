@@ -2,21 +2,14 @@ package com.blueview.led
 
 import android.os.Bundle
 import android.renderscript.Allocation
+import android.view.FrameMetrics
 import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import androidx.viewpager.widget.ViewPager
-import com.blueview.led.ui.control.ControlFragment
-import com.blueview.led.ui.home.HomeFragment
-import com.blueview.led.ui.map.MapFragment
-import com.blueview.led.ui.user.UserFragment
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -32,7 +25,8 @@ class MainActivity : AppCompatActivity() {
         viewPager=findViewById(R.id.main_viewpager)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        fragmentPagerAdapter= fragment_adapter(supportFragmentManager)
+        //fragmentPagerAdapter= fragment_adapter(supportFragmentManager)
+
         viewPager.adapter=fragmentPagerAdapter
 
         viewPager.addOnPageChangeListener(object:ViewPager.OnPageChangeListener{
@@ -79,22 +73,32 @@ class MainActivity : AppCompatActivity() {
         })
 
     }
-    class fragment_adapter : FragmentPagerAdapter {
-        var fragment_list: MutableList<Fragment> = ArrayList()
+    class fragm(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
-        constructor(fm: FragmentManager) : super(fm) {
-            fragment_list.add(HomeFragment())
-            fragment_list.add(ControlFragment())
-            fragment_list.add(MapFragment())
-            fragment_list.add(UserFragment())
+        override fun getCount(): Int {
+            TODO("Not yet implemented")
         }
 
         override fun getItem(position: Int): Fragment {
-            return fragment_list.get(position)
+            TODO("Not yet implemented")
         }
-
-        override fun getCount(): Int = fragment_list.size
     }
+//    class fragment_adapter : FragmentPagerAdapter {
+//        var fragment_list: MutableList<Fragment> = ArrayList()
+//
+//        constructor(fm: FragmentManager) : super(fm) {
+//            fragment_list.add(HomeFragment())
+//            fragment_list.add(ControlFragment())
+//            fragment_list.add(MapFragment())
+//            fragment_list.add(UserFragment())
+//        }
+//
+//        override fun getItem(position: Int): Fragment {
+//            return fragment_list.get(position)
+//        }
+//
+//        override fun getCount(): Int = fragment_list.size
+//    }
 }
 
 
