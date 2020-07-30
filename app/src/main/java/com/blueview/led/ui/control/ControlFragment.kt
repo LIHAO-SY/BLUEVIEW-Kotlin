@@ -2,10 +2,14 @@ package com.blueview.led.ui.control
 
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.text.TextPaint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.RadioButton
 import com.google.android.material.tabs.TabLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -32,6 +36,7 @@ class ControlFragment : Fragment() {
     private var listtabTitle: MutableList<String> = mutableListOf("控制")
     private var listtab1Title:MutableList<String> = mutableListOf("全部")
     private var listtab2Title:MutableList<String> = mutableListOf("全部")
+    var handler:Handler= Handler()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,16 +54,15 @@ class ControlFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        control_tabTitle=view.findViewById(R.id.control_tab_title)
-        control_tab1=view.findViewById(R.id.control_tab1)
-        control_tab2=view.findViewById(R.id.control_tab2)
-        control_RecyclerView=view.findViewById(R.id.control_recyclerview)
-        recylerList= ArrayList()
+        control_tabTitle = view.findViewById(R.id.control_tab_title)
+        control_tab1 = view.findViewById(R.id.control_tab1)
+        control_tab2 = view.findViewById(R.id.control_tab2)
+        control_RecyclerView = view.findViewById(R.id.control_recyclerview)
+        recylerList = ArrayList()
         control_tabTitle.addTab(control_tabTitle.newTab())
         control_tab1.addTab(control_tab1.newTab())
         control_tab2.addTab(control_tab2.newTab())
-        for (i in 1..10)
-        {
+        for (i in 1..10) {
             control_tab1.addTab(control_tab1.newTab())
             control_tab2.addTab(control_tab2.newTab())
             listtab1Title.add("设备$i")
@@ -68,30 +72,30 @@ class ControlFragment : Fragment() {
             //设置自定义显示小红点的布局
             var tab = control_tabTitle.getTabAt(i)
             tab?.setCustomView(R.layout.tablayoutview)
-            tabText= tab?.customView?.findViewById(R.id.tabtext)!!
+            tabText = tab?.customView?.findViewById(R.id.tabtext)!!
             tabText?.text = str
         }
-        listtab1Title.forEachIndexed{i,str->
-            var tab: TabLayout.Tab? =control_tab1.getTabAt(i)
+        listtab1Title.forEachIndexed { i, str ->
+            var tab: TabLayout.Tab? = control_tab1.getTabAt(i)
             tab?.setCustomView(R.layout.tablayoutview)
-            tabText= tab?.customView?.findViewById(R.id.tabtext)!!
-            tabText?.text=str
+            tabText = tab?.customView?.findViewById(R.id.tabtext)!!
+            tabText?.text = str
         }
-        listtab2Title.forEachIndexed{i,str->
-            var tab: TabLayout.Tab? =control_tab2.getTabAt(i)
+        listtab2Title.forEachIndexed { i, str ->
+            var tab: TabLayout.Tab? = control_tab2.getTabAt(i)
             tab?.setCustomView(R.layout.tablayoutview)
-            tabText= tab?.customView?.findViewById(R.id.tabtext)!!
-            tabText?.text=str
+            tabText = tab?.customView?.findViewById(R.id.tabtext)!!
+            tabText?.text = str
         }
         initTab()
         control_tabTitle.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {
-                
+
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
                 val view: View? = tab?.getCustomView()
-                var tabtext:TextView = view?.findViewById(R.id.tabtext)!!
+                var tabtext: TextView = view?.findViewById(R.id.tabtext)!!
                 tabtext?.setTextSize(18f)
                 val paint: TextPaint = tabtext.getPaint()
                 paint.isFakeBoldText = false
@@ -99,62 +103,60 @@ class ControlFragment : Fragment() {
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 val view: View? = tab?.getCustomView()
-                var tabtext:TextView = view?.findViewById(R.id.tabtext)!!
+                var tabtext: TextView = view?.findViewById(R.id.tabtext)!!
                 tabtext?.setTextSize(20f)
                 val paint: TextPaint = tabtext.getPaint()
                 paint.isFakeBoldText = true
             }
         })
 
-        control_tab1.addOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
+        control_tab1.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {
 
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
                 val view: View? = tab?.getCustomView()
-                var tabtext:TextView = view?.findViewById(R.id.tabtext)!!
+                var tabtext: TextView = view?.findViewById(R.id.tabtext)!!
                 tabtext?.setTextColor(Color.BLACK)
             }
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 val view: View? = tab?.getCustomView()
-                var tabtext:TextView = view?.findViewById(R.id.tabtext)!!
+                var tabtext: TextView = view?.findViewById(R.id.tabtext)!!
                 tabtext?.setTextColor(Color.parseColor("#03DAC5"))
             }
         })
 
-        control_tab2.addOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
+        control_tab2.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {
 
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
                 val view: View? = tab?.getCustomView()
-                var tabtext:TextView = view?.findViewById(R.id.tabtext)!!
+                var tabtext: TextView = view?.findViewById(R.id.tabtext)!!
                 tabtext?.setTextColor(Color.BLACK)
             }
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 val view: View? = tab?.getCustomView()
-                var tabtext:TextView = view?.findViewById(R.id.tabtext)!!
+                var tabtext: TextView = view?.findViewById(R.id.tabtext)!!
                 tabtext?.setTextColor(Color.parseColor("#03DAC5"))
             }
         })
-        for (i in 1..10)
-        {
-            recylerList.add(ControlRecyData("主控器$i","状态：正常$i","功率：10$i","群组：2$i"))
+        for (i in 1..10) {
+            recylerList.add(ControlRecyData("主控器$i", "状态：正常$i", "功率：10$i", "群组：2$i"))
         }
-        linerlayoutManager= LinearLayoutManager(context)
-        control_RecyclerView.layoutManager=linerlayoutManager
-        control_RecyclerView.adapter=ControlRecyAdapter(recylerList)
+        linerlayoutManager = LinearLayoutManager(context)
+        control_RecyclerView.layoutManager = linerlayoutManager
+        control_RecyclerView.adapter = ControlRecyAdapter(recylerList, control_RecyclerView)
     }
-    fun initTab()
-    {
-        var mtexttab:TextView
-        var view:View
+    fun initTab() {
+        var mtexttab: TextView
+        var view: View
         //Title
-        view= control_tabTitle.getTabAt(0)?.getCustomView()!!
+        view = control_tabTitle.getTabAt(0)?.getCustomView()!!
         mtexttab = view?.findViewById(R.id.tabtext)!!
         mtexttab?.setTextSize(20f)
         val paint: TextPaint = mtexttab.getPaint()
@@ -168,4 +170,10 @@ class ControlFragment : Fragment() {
         mtexttab = view?.findViewById(R.id.tabtext)!!
         mtexttab?.setTextColor(Color.parseColor("#03DAC5"))
     }
+
+
+
 }
+
+
+

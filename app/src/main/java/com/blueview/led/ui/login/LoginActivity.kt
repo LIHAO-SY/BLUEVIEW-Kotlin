@@ -67,6 +67,7 @@ class LoginActivity : AppCompatActivity() {
 //        textview.setOnClickListener {
 //            Toast.makeText(this,"test",Toast.LENGTH_LONG)
 //        }
+        loginViewModel.loginDataChanged(username.text.toString(), password.text.toString())
         loginViewModel.loginResult.observe(this@LoginActivity, Observer {
             val loginResult = it ?: return@Observer
 
