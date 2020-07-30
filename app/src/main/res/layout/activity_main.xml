@@ -29,32 +29,5 @@
         app:layout_constraintBottom_toTopOf="@+id/nav_view"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="0dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:background="@drawable/round_edittext"
-        android:ems="10"
-        android:gravity="center|center_horizontal|center_vertical"
-        android:hint="搜索设备"
-        android:inputType="textPersonName"
-        android:paddingLeft="0dp"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/nav_view"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/main_fragment"
-        app:layout_constraintVertical_bias="0.12" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="30dp"
-        android:src="@drawable/search_24"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName" />
 </androidx.constraintlayout.widget.ConstraintLayout>
