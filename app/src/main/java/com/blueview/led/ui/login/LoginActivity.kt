@@ -1,11 +1,9 @@
 package com.blueview.led.ui.login
+
 import android.app.Activity
 import android.content.Intent
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import android.os.Build
 import android.os.Bundle
-import androidx.annotation.StringRes
-import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -14,10 +12,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.blueview.led.MainActivity
-
 import com.blueview.led.R
+
 
 class LoginActivity : AppCompatActivity() {
 
@@ -28,14 +29,22 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var loading:ProgressBar
     private val list:ArrayList<String>?=null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            getWindow().setStatusBarColor(getResources().getColor(R.color.bar_color)); //设置状态栏颜色（底色），
+            getWindow().getDecorView().setSystemUiVisibility( View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//实现状态栏图标和文字颜色为黑色,看其他文章，说只有黑色和白色
+        }
         setContentView(R.layout.activity_login)
+        supportActionBar?.hide()
         list?.add("hjsdhfd")
         if (list===null){
             Toast.makeText(this,"",Toast.LENGTH_LONG);
         }
+        print("test")
+        //textview=findViewById(R.id.textBottom)
         username = findViewById(R.id.username)
         password = findViewById(R.id.password)
         login = findViewById(R.id.login)
@@ -54,7 +63,10 @@ class LoginActivity : AppCompatActivity() {
                 password.error = getString(loginState.passwordError)
             }
         })
-
+//        textview=findViewById(R.id.textBottom)
+//        textview.setOnClickListener {
+//            Toast.makeText(this,"test",Toast.LENGTH_LONG)
+//        }
         loginViewModel.loginResult.observe(this@LoginActivity, Observer {
             val loginResult = it ?: return@Observer
 
@@ -122,6 +134,7 @@ class LoginActivity : AppCompatActivity() {
     private fun showLoginFailed(@StringRes errorString: Int) {
         Toast.makeText(applicationContext, errorString, Toast.LENGTH_SHORT).show()
     }
+
 }
 
 /**
@@ -137,4 +150,5 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
 
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
     })
+
 }
