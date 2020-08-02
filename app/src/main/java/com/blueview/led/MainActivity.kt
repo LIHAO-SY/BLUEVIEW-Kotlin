@@ -7,8 +7,6 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
-import android.widget.TableLayout
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -23,7 +21,6 @@ import com.blueview.led.ui.map.MapFragment
 import com.blueview.led.ui.user.UserFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.tabs.TabLayout
 
 
 class MainActivity : AppCompatActivity() {
@@ -31,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewPager: ViewPager
     private lateinit var fragmentPagerAdapter: FragmentPagerAdapter
     private lateinit var fragment_list:ArrayList<Fragment>
-    private lateinit var tab_title:TabLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         changeStatusBarTransparent1(this)
@@ -48,7 +45,6 @@ class MainActivity : AppCompatActivity() {
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
 //        NavigationUI.setupWithNavController(navView, navController)
         viewPager=findViewById(R.id.main_viewpager)
-        tab_title=findViewById(R.id.tab_title)
         fragment_list= ArrayList()
         fragment_list.add(HomeFragment())
         fragment_list.add(ControlFragment())
@@ -91,18 +87,13 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
         })
-        viewPager.offscreenPageLimit=3
-//        viewPager.setOnTouchListener(object : View.OnTouchListener {
+//        viewPager.setOnTouchListener(object :OnTouchListener{
 //            override fun onTouch(v: View?, event: MotionEvent?): Boolean
 //            {
 //                return true
 //            }
 //        })
-        tab_title.addTab(tab_title.newTab())
-        var tab = tab_title.getTabAt(0)
-            tab?.setCustomView(R.layout.tablayoutview)
-            var tabtext: TextView = tab?.customView?.findViewById<TextView>(R.id.tabtext)!!
-            tabtext?.text = "TITLE"
+        viewPager.offscreenPageLimit=2
     }
     class fragmment_adapater(fm: FragmentManager ,var fragment_list:ArrayList<Fragment>) : FragmentPagerAdapter(fm) {
 
@@ -161,9 +152,6 @@ class MainActivity : AppCompatActivity() {
 //            //getWindow().setStatusBarColor(getResources().getColor(R.color.bar_color)); //设置状态栏颜色（底色），
 //            getWindow()?.getDecorView()?.setSystemUiVisibility( View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//实现状态栏图标和文字颜色为黑色,看其他文章，说只有黑色和白色
 //        }
-    }
-    object test {
-
     }
 }
 
