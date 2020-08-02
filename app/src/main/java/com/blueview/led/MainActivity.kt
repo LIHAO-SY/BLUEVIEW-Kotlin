@@ -4,10 +4,15 @@ import android.app.Activity
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import android.view.View.inflate
 import android.view.WindowManager
+import android.widget.TableLayout
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ColorStateListInflaterCompat.inflate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -15,12 +20,14 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.viewpager.widget.ViewPager
+import com.blueview.led.Util.ViewPagerUtil
 import com.blueview.led.ui.control.ControlFragment
 import com.blueview.led.ui.home.HomeFragment
 import com.blueview.led.ui.map.MapFragment
 import com.blueview.led.ui.user.UserFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.tabs.TabLayout
 
 
 class MainActivity : AppCompatActivity() {
@@ -28,7 +35,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewPager: ViewPager
     private lateinit var fragmentPagerAdapter: FragmentPagerAdapter
     private lateinit var fragment_list:ArrayList<Fragment>
-
+    private lateinit var tab_title:TabLayout
+    private var hometabtitle= arrayOf("首页","功率查询")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         changeStatusBarTransparent1(this)
@@ -45,6 +53,7 @@ class MainActivity : AppCompatActivity() {
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
 //        NavigationUI.setupWithNavController(navView, navController)
         viewPager=findViewById(R.id.main_viewpager)
+        tab_title=findViewById(R.id.tab_title)
         fragment_list= ArrayList()
         fragment_list.add(HomeFragment())
         fragment_list.add(ControlFragment())
@@ -53,22 +62,22 @@ class MainActivity : AppCompatActivity() {
         fragmentPagerAdapter=fragmment_adapater(supportFragmentManager,fragment_list)
         viewPager.adapter=fragmentPagerAdapter
         viewPager.addOnPageChangeListener(object:ViewPager.OnPageChangeListener{
-           override fun onPageScrollStateChanged(state: Int) {
+            override fun onPageScrollStateChanged(state: Int) {
 
-           }
+            }
 
-           override fun onPageScrolled(
-               position: Int,
-               positionOffset: Float,
-               positionOffsetPixels: Int
-           ) {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
 
-           }
+            }
 
-           override fun onPageSelected(position: Int) {
-               navView.menu.getItem(position).setChecked(true)
-           }
-       })
+            override fun onPageSelected(position: Int) {
+                navView.menu.getItem(position).setChecked(true)
+            }
+        })
 
         navView.setOnNavigationItemSelectedListener(object :NavigationView.OnNavigationItemSelectedListener,
             BottomNavigationView.OnNavigationItemSelectedListener {
@@ -87,13 +96,26 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
         })
-//        viewPager.setOnTouchListener(object :OnTouchListener{
+        viewPager.offscreenPageLimit=3
+//        viewPager.setOnTouchListener(object : View.OnTouchListener {
 //            override fun onTouch(v: View?, event: MotionEvent?): Boolean
 //            {
 //                return true
 //            }
 //        })
-        viewPager.offscreenPageLimit=2
+        val root = LayoutInflater.from(this).inflate(R.layout.fragment_home,null)
+        var viewpa:ViewPager=root.findViewById(R.id.home_viewpager)
+        tab_title.setupWithViewPager(viewpa)
+        for (i in 0..hometabtitle.size-1)
+        {
+            tab_title.addTab(tab_title.newTab())
+            var tab = tab_title.getTabAt(i)
+            tab?.setCustomView(R.layout.tablayoutview)
+            var tabtext: TextView = tab?.customView?.findViewById<TextView>(R.id.tabtext)!!
+            tabtext?.text =hometabtitle.get(i)
+        }
+
+
     }
     class fragmment_adapater(fm: FragmentManager ,var fragment_list:ArrayList<Fragment>) : FragmentPagerAdapter(fm) {
 
@@ -153,11 +175,18 @@ class MainActivity : AppCompatActivity() {
 //            getWindow()?.getDecorView()?.setSystemUiVisibility( View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//实现状态栏图标和文字颜色为黑色,看其他文章，说只有黑色和白色
 //        }
     }
+
+
+    object test {
+
+        private lateinit var viewpag:ViewPager
+        fun setviewpager(mView:ViewPager)
+        {
+            viewpag=mView
+        }
+        fun getviewpag():ViewPager
+        {
+            return viewpag
+        }
+    }
 }
-
-
-
-
-
-
-
