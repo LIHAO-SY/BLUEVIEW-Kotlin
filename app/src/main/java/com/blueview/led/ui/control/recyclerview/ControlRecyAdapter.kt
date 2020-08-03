@@ -73,6 +73,7 @@ class ControlRecyAdapter(var recylerList:ArrayList<ControlRecyData>,var mRecycle
                    isAllRadioStartCheck=false
                    isRadioStartVisiblity=false
                    control_allradio.isChecked=false
+                   setRecyclerRadioisCheck(false)
                    setRecyclerChildRadioOrImgisVisiblity(false)
                    return
                }
@@ -158,12 +159,12 @@ class ControlRecyAdapter(var recylerList:ArrayList<ControlRecyData>,var mRecycle
             var radio: RadioButton? = view?.findViewById(R.id.control_radio)
             var img: ImageView? = view?.findViewById(R.id.control_img)
             if (isRadioVisibility) {
-                img?.visibility = View.GONE
+                img?.visibility = View.INVISIBLE
                 radio?.visibility = View.VISIBLE
 
             } else {
                 img?.visibility = View.VISIBLE
-                radio?.visibility = View.GONE
+                radio?.visibility = View.INVISIBLE
             }
         }
     }

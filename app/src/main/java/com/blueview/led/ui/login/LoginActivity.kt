@@ -76,9 +76,9 @@ class LoginActivity : AppCompatActivity() {
             }
             if (loginResult.success != null) {
                 updateUiWithUser(loginResult.success)
-                val intent=Intent()
-                intent.setClass(this,MainActivity::class.java)
+                intent= Intent(this@LoginActivity,MainActivity::class.java)
                 startActivity(intent)
+                finish()
             }
             setResult(Activity.RESULT_OK)
             //Complete and destroy login activity once successful
@@ -114,6 +114,8 @@ class LoginActivity : AppCompatActivity() {
             login.setOnClickListener {
                 loading.visibility = View.VISIBLE
                 loginViewModel.login(username.text.toString(), password.text.toString())
+
+
             }
 
         }

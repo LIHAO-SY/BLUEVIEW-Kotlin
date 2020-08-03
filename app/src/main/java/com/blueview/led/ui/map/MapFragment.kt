@@ -33,7 +33,7 @@ class MapFragment : Fragment() {
 //        notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
 //            textView.text = it
 //        })
-        activity?.let { changeStatusBarTransparent(it) }
+        //activity?.let { changeStatusBarTransparent(it) }
         return root
     }
 
@@ -51,7 +51,7 @@ class MapFragment : Fragment() {
         webSettings.domStorageEnabled = true
         webSettings.databaseEnabled = true
         mapWebview!!.setWebViewClient(webClient)
-        mapWebview!!.loadUrl("HTTP://www.baidu.cn")
+        mapWebview!!.loadUrl("HTTP://www.qike.store/BAIDUMAP/")
     }
     private val webClient = object : WebViewClient() {
         override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {

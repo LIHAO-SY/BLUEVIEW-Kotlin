@@ -4,30 +4,21 @@ import android.app.Activity
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
-import android.view.View.inflate
+import android.view.Window
 import android.view.WindowManager
-import android.widget.TableLayout
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.res.ColorStateListInflaterCompat.inflate
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.navigation.Navigation
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 import androidx.viewpager.widget.ViewPager
-import com.blueview.led.Util.ViewPagerUtil
 import com.blueview.led.ui.control.ControlFragment
 import com.blueview.led.ui.home.HomeFragment
 import com.blueview.led.ui.map.MapFragment
 import com.blueview.led.ui.user.UserFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.tabs.TabLayout
 
 
 class MainActivity : AppCompatActivity() {
@@ -35,11 +26,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewPager: ViewPager
     private lateinit var fragmentPagerAdapter: FragmentPagerAdapter
     private lateinit var fragment_list:ArrayList<Fragment>
-    private lateinit var tab_title:TabLayout
-    private var hometabtitle= arrayOf("首页","功率查询")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        changeStatusBarTransparent1(this)
+        setISfullScreen(this,false)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
@@ -53,7 +43,7 @@ class MainActivity : AppCompatActivity() {
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
 //        NavigationUI.setupWithNavController(navView, navController)
         viewPager=findViewById(R.id.main_viewpager)
-        tab_title=findViewById(R.id.tab_title)
+
         fragment_list= ArrayList()
         fragment_list.add(HomeFragment())
         fragment_list.add(ControlFragment())
@@ -85,13 +75,28 @@ class MainActivity : AppCompatActivity() {
                 when(item.itemId)
                 {
                     R.id.navigation_home->
+                    {
+                        setISfullScreen(this@MainActivity,false)
                         viewPager.setCurrentItem(0,true)
+                    }
+
                     R.id.navigation_control->
+                    {
+                        setISfullScreen(this@MainActivity,false)
                         viewPager.setCurrentItem(1,true)
+                    }
+
                     R.id.navigation_map->
+                    {
+                        setISfullScreen(this@MainActivity,true)
                         viewPager.setCurrentItem(2,true)
+                    }
                     R.id.navigation_user->
+                    {
+                        setISfullScreen(this@MainActivity,false)
                         viewPager.setCurrentItem(3,true)
+                    }
+
                 }
                 return false
             }
@@ -103,17 +108,8 @@ class MainActivity : AppCompatActivity() {
 //                return true
 //            }
 //        })
-        val root = LayoutInflater.from(this).inflate(R.layout.fragment_home,null)
-        var viewpa:ViewPager=root.findViewById(R.id.home_viewpager)
-        tab_title.setupWithViewPager(viewpa)
-        for (i in 0..hometabtitle.size-1)
-        {
-            tab_title.addTab(tab_title.newTab())
-            var tab = tab_title.getTabAt(i)
-            tab?.setCustomView(R.layout.tablayoutview)
-            var tabtext: TextView = tab?.customView?.findViewById<TextView>(R.id.tabtext)!!
-            tabtext?.text =hometabtitle.get(i)
-        }
+
+
 
 
     }
@@ -151,29 +147,28 @@ class MainActivity : AppCompatActivity() {
             getWindow()?.getDecorView()?.setSystemUiVisibility( View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//实现状态栏图标和文字颜色为黑色,看其他文章，说只有黑色和白色
         }
     }
-    fun changeStatusBarTransparent2(activity: Activity) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            return
-        }
-        val window = activity.window
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+    fun setISfullScreen(activity: Activity,isFullScreen:Boolean) {
+        if (Build.VERSION.SDK_INT >= 21) { //21表示5.0
+            val window: Window = window
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            window.getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            )
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            val option = window.decorView.systemUiVisibility or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-            window.decorView.systemUiVisibility = option
-            //6.0以上系统支持修改状态栏字体颜色，6.0以下不支持的设为黑色透明背景，突显白色字体
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                window.statusBarColor = Color.parseColor("#00000000")
-            }else{
-                window.statusBarColor = Color.parseColor("#20000000")
-            }
-        } else {
+            window.setStatusBarColor(Color.TRANSPARENT)
+        } else if (Build.VERSION.SDK_INT >= 19) { //19表示4.4
             window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+            //虚拟键盘也透明
+            //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            //getWindow().setStatusBarColor(getResources().getColor(R.color.bar_color)); //设置状态栏颜色（底色），
-//            getWindow()?.getDecorView()?.setSystemUiVisibility( View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//实现状态栏图标和文字颜色为黑色,看其他文章，说只有黑色和白色
-//        }
+        if(!isFullScreen)
+        {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                //getWindow().setStatusBarColor(getResources().getColor(R.color.bar_color)); //设置状态栏颜色（底色），
+                getWindow()?.getDecorView()?.setSystemUiVisibility( View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//实现状态栏图标和文字颜色为黑色,看其他文章，说只有黑色和白色
+            }
+        }
     }
 
 

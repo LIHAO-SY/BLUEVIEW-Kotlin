@@ -5,14 +5,29 @@
     android:layout_height="match_parent"
     tools:context="com.blueview.led.ui.home.HomeFragment">
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/home_tab_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabIndicatorColor="@color/colorAccent"
+        app:tabIndicatorFullWidth="false"
+        app:tabIndicatorHeight="3dp"
+        app:tabMode="scrollable"
+        app:tabRippleColor="@android:color/transparent"
+        tools:ignore="MissingConstraints" />
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/home_viewpager"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_tab_title"
         tools:ignore="MissingClass,MissingConstraints"></androidx.viewpager.widget.ViewPager>
 
 
