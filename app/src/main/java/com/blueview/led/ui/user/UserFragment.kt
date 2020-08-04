@@ -24,7 +24,7 @@ class UserFragment: Fragment() {
     private lateinit var user_listview:ListView
     private lateinit var simple_Adapter:SimpleAdapter
     private val dataList : ArrayList<Map<String, Any>>? = ArrayList()//SimpleAdapter中的数据源
-    private var imgList:MutableList<Int> = mutableListOf(R.drawable.map_24,R.drawable.ic_home_black_24dp,R.drawable.map_24,R.drawable.ic_home_black_24dp)
+    private var imgList:MutableList<Int> = mutableListOf(R.drawable.mygroup,R.drawable.ledlight,R.drawable.timecontrol,R.drawable.set)
     private var stringList:MutableList<String> = mutableListOf("我的群组","一键调光","定时控制","设置")
 
 

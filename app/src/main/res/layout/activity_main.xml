@@ -7,10 +7,33 @@
     android:layout_height="match_parent">
 
 
-
+    <ImageView
+        android:id="@+id/image_mesag"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="8dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:src="@drawable/mesage"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/image_set"
+        app:layout_constraintEnd_toStartOf="@+id/image_set"
+        app:layout_constraintTop_toTopOf="@+id/image_set" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/image_set"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:src="@drawable/menu"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/imag_sm"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_marginTop="10dp"
@@ -18,7 +41,8 @@
         android:src="@drawable/at"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:background="?android:attr/selectableItemBackground"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
@@ -31,14 +55,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu" />
 
-    <com.blueview.led.ui.NoScrollViewPager
-        android:id="@+id/main_viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/nav_view"
-        app:layout_constraintTop_toTopOf="parent" >
-
-    </com.blueview.led.ui.NoScrollViewPager>
     <!--    <fragment-->
 
     <!--        android:id="@+id/main_fragment"-->
@@ -49,9 +65,20 @@
     <!--        app:layout_constraintBottom_toTopOf="@+id/nav_view"-->
     <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
+    <com.blueview.led.ui.NoScrollViewPager
+        android:id="@+id/main_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/nav_view"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="-26dp">
+
+    </com.blueview.led.ui.NoScrollViewPager>
+
     <TextView
         android:id="@+id/editTextTextPersonName"
-        android:layout_width="392dp"
+        android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="60dp"

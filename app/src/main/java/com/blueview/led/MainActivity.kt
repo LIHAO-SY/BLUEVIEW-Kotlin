@@ -6,9 +6,12 @@ import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.view.View.*
 import android.view.Window
 import android.view.WindowManager
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -19,13 +22,16 @@ import com.blueview.led.ui.map.MapFragment
 import com.blueview.led.ui.user.UserFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
-
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewPager: ViewPager
     private lateinit var fragmentPagerAdapter: FragmentPagerAdapter
     private lateinit var fragment_list:ArrayList<Fragment>
+    private lateinit var mesageimg:ImageView
+    private lateinit var setimg:ImageView
+    private lateinit var smimg:ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +49,9 @@ class MainActivity : AppCompatActivity() {
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
 //        NavigationUI.setupWithNavController(navView, navController)
         viewPager=findViewById(R.id.main_viewpager)
-
+        mesageimg=findViewById(R.id.image_mesag)
+        setimg=findViewById(R.id.image_set)
+        smimg=findViewById(R.id.imag_sm)
         fragment_list= ArrayList()
         fragment_list.add(HomeFragment())
         fragment_list.add(ControlFragment())
@@ -76,23 +84,35 @@ class MainActivity : AppCompatActivity() {
                 {
                     R.id.navigation_home->
                     {
+                        mesageimg.visibility= GONE
+                        setimg.visibility= GONE
+                        imag_sm.visibility= VISIBLE
                         setISfullScreen(this@MainActivity,false)
                         viewPager.setCurrentItem(0,true)
                     }
 
                     R.id.navigation_control->
                     {
+                        mesageimg.visibility= GONE
+                        setimg.visibility= GONE
+                        imag_sm.visibility= VISIBLE
                         setISfullScreen(this@MainActivity,false)
                         viewPager.setCurrentItem(1,true)
                     }
 
                     R.id.navigation_map->
                     {
+                        mesageimg.visibility= GONE
+                        setimg.visibility= GONE
+                        imag_sm.visibility= VISIBLE
                         setISfullScreen(this@MainActivity,true)
                         viewPager.setCurrentItem(2,true)
                     }
                     R.id.navigation_user->
                     {
+                        smimg.visibility= GONE
+                        mesageimg.visibility= VISIBLE
+                        setimg.visibility= VISIBLE
                         setISfullScreen(this@MainActivity,false)
                         viewPager.setCurrentItem(3,true)
                     }
@@ -108,9 +128,6 @@ class MainActivity : AppCompatActivity() {
 //                return true
 //            }
 //        })
-
-
-
 
     }
     class fragmment_adapater(fm: FragmentManager ,var fragment_list:ArrayList<Fragment>) : FragmentPagerAdapter(fm) {

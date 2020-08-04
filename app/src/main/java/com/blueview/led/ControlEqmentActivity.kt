@@ -20,9 +20,8 @@ class ControlEqmentActivity: AppCompatActivity() {
         supportActionBar?.hide()
         var intent=intent
         var id= intent.getIntExtra("id",9999)
-        controlEqmentText=findViewById(R.id.controlEqment_text)
-        controlEqmentText.text="你选择的是第："+id.toString()+"个"
-        controlEqmentText.setTextSize(20f)
+        controlEqmentText=findViewById(R.id.textView_ledqment)
+        controlEqmentText.text=id.toString()
     }
     fun changeStatusBarTransparent2(activity: Activity) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {

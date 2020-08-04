@@ -44,7 +44,7 @@ class ControlRecyAdapter(var recylerList:ArrayList<ControlRecyData>,var mRecycle
 
     override fun getItemCount(): Int
     {
-       return mRecylerList.size
+        return mRecylerList.size
     }
 
     override fun onBindViewHolder(holder: ControlRecyAdapter.ViewHolder, position: Int) {
@@ -67,16 +67,16 @@ class ControlRecyAdapter(var recylerList:ArrayList<ControlRecyData>,var mRecycle
         })
         holder.card.setOnClickListener(object :View.OnClickListener{
             override fun onClick(v: View?) {
-               if (isRadioStartVisiblity)
-               {
-                   bottom.visibility=View.GONE
-                   isAllRadioStartCheck=false
-                   isRadioStartVisiblity=false
-                   control_allradio.isChecked=false
-                   setRecyclerRadioisCheck(false)
-                   setRecyclerChildRadioOrImgisVisiblity(false)
-                   return
-               }
+                if (isRadioStartVisiblity)
+                {
+                    bottom.visibility=View.GONE
+                    isAllRadioStartCheck=false
+                    isRadioStartVisiblity=false
+                    control_allradio.isChecked=false
+                    setRecyclerRadioisCheck(false)
+                    setRecyclerChildRadioOrImgisVisiblity(false)
+                    return
+                }
                 var intent=Intent(context,ControlEqmentActivity::class.java)
                 intent.putExtra("id",position)
                 context.startActivity(intent)
@@ -87,13 +87,13 @@ class ControlRecyAdapter(var recylerList:ArrayList<ControlRecyData>,var mRecycle
                 setRecyclerChildRadioOrImgisVisiblity(true)
                 bottom.visibility=View.VISIBLE
                 isRadioStartVisiblity=true
-               return true
+                return true
             }
         })
         mRecyclerView.setOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-         
+
             }
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
