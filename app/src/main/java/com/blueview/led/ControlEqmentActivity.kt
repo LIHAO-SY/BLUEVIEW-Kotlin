@@ -8,10 +8,17 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager.widget.ViewPager
+import com.blueview.led.ui.ControlEqment.ControlEqmentLight
+import com.blueview.led.ui.ControlEqment.ControlEqmentRgb
 
 class ControlEqmentActivity: AppCompatActivity() {
 
     private lateinit var controlEqmentText:TextView
+    private lateinit var epment_viewpager:ViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +28,23 @@ class ControlEqmentActivity: AppCompatActivity() {
         var intent=intent
         var id= intent.getIntExtra("id",9999)
         controlEqmentText=findViewById(R.id.textView_ledqment)
+        epment_viewpager=findViewById(R.id.epment_viewPager)
+        var listFragment: MutableList< Fragment> = mutableListOf( ControlEqmentLight(), ControlEqmentRgb()
+        )
+        //关键在于先关联viewpager，后修改tab布局（注意在绑定了viewpager后tablayout的tab已经被设置了，所以做修改操作就好了）
+        epment_viewpager.adapter = fragmment_adapater(supportFragmentManager, listFragment)
         controlEqmentText.text=id.toString()
+
+    }
+    class fragmment_adapater(fm: FragmentManager ,var fragment_list:MutableList<Fragment>) : FragmentPagerAdapter(fm) {
+
+        override fun getCount(): Int {
+            return fragment_list.size
+        }
+
+        override fun getItem(position: Int): Fragment {
+            return fragment_list.get(position)
+        }
     }
     fun changeStatusBarTransparent2(activity: Activity) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
@@ -47,4 +70,5 @@ class ControlEqmentActivity: AppCompatActivity() {
             getWindow()?.getDecorView()?.setSystemUiVisibility( View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//实现状态栏图标和文字颜色为黑色,看其他文章，说只有黑色和白色
         }
     }
+
 }
