@@ -8,9 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.blueview.led.ControlEqmentActivity
+import com.blueview.led.ui.ControlEqment.ControlEqmentActivity
 import com.blueview.led.R
 
 class ControlRecyAdapter(var recylerList:ArrayList<ControlRecyData>,var mRecyclerView: RecyclerView,var root:View): RecyclerView.Adapter<ControlRecyAdapter.ViewHolder>()
@@ -77,7 +76,8 @@ class ControlRecyAdapter(var recylerList:ArrayList<ControlRecyData>,var mRecycle
                     setRecyclerChildRadioOrImgisVisiblity(false)
                     return
                 }
-                var intent=Intent(context,ControlEqmentActivity::class.java)
+                var intent=Intent(context,
+                    ControlEqmentActivity::class.java)
                 intent.putExtra("id",position)
                 context.startActivity(intent)
             }
@@ -90,7 +90,7 @@ class ControlRecyAdapter(var recylerList:ArrayList<ControlRecyData>,var mRecycle
                 return true
             }
         })
-        mRecyclerView.setOnScrollListener(object : RecyclerView.OnScrollListener() {
+       /* mRecyclerView.setOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
 
@@ -113,7 +113,7 @@ class ControlRecyAdapter(var recylerList:ArrayList<ControlRecyData>,var mRecycle
                 }
 
             }
-        })
+        })*/
         allradioonclick.setOnClickListener(View.OnClickListener {
 
             if (control_allradio.isChecked)
