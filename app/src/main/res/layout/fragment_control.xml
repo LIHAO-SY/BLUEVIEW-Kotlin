@@ -3,9 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.blueview.led.ui.control.ControlFragment"
+    tools:context="com.blueview.led.UI.control.ControlFragment"
     android:orientation="vertical">
-
+    <com.blueview.led.Util.StatusBarHeightView
+        android:id="@+id/statusBarHeightView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        app:use_type="use_padding_top"
+        tools:ignore="MissingConstraints" />
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/control_tab_title"
         android:layout_width="match_parent"
@@ -75,6 +81,8 @@
         android:id="@+id/control_bottom"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="4dp"
         android:visibility="gone">
 
         <LinearLayout
@@ -90,18 +98,24 @@
             <Button
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="2dp"
                 android:layout_weight="1"
+                android:background="@color/green"
                 android:text="分组"
+                android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:layout_editor_absoluteY="0dp" />
 
             <Button
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="2dp"
                 android:layout_weight="1"
+                android:background="@color/green"
                 android:text="控制"
+                android:textColor="@color/white"
                 app:layout_constraintEnd_toStartOf="@+id/control_AllradioButton"
                 app:layout_constraintStart_toEndOf="@+id/button2"
                 tools:layout_editor_absoluteY="0dp" />
@@ -112,8 +126,6 @@
             android:id="@+id/constraintLayout2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/control_bottom"

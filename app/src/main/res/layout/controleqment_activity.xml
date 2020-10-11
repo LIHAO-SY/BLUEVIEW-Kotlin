@@ -5,17 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.viewpager.widget.ViewPager
+    <com.blueview.led.UI.ViewPager.NoScrollViewPager
         android:id="@+id/epment_viewPager"
         android:layout_width="0dp"
         android:layout_height="230dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cad" />
+        app:layout_constraintTop_toBottomOf="@+id/control_cad" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cad"
+        android:id="@+id/control_cad"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/bar_color"
@@ -34,7 +34,7 @@
             tools:ignore="MissingConstraints">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/control_back"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="16dp"
@@ -53,7 +53,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                app:layout_constraintStart_toEndOf="@+id/control_back"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Switch
@@ -164,4 +164,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/epment_viewPager"
         app:srcCompat="@drawable/right" />
+
+    <Switch
+        android:id="@+id/switch2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:text="定时"
+        app:layout_constraintBottom_toBottomOf="@+id/planspinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/planspinner" />
+
+    <Spinner
+        android:spinnerMode="dropdown"
+        android:id="@+id/planspinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toStartOf="@+id/switch2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/SeekBar_ledcoloreq" />
 </androidx.constraintlayout.widget.ConstraintLayout>

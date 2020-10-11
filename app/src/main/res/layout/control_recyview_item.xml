@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="90dp"
-    android:layout_marginLeft="5dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginRight="5dp"
-    app:cardCornerRadius="5dp"
+    android:layout_height="80dp"
+    android:layout_marginLeft="0dp"
+    android:layout_marginTop="0dp"
+    android:layout_marginRight="0dp"
+    app:cardCornerRadius="0dp"
     app:cardElevation="2dp"
     app:cardMaxElevation="4dp"
     tools:ignore="MissingConstraints">
@@ -23,12 +23,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
             android:text="TextView"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/cotrol_recyview_itme_text1"
             app:layout_constraintStart_toEndOf="@+id/cotrol_recyview_itme_text1"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/cotrol_recyview_itme_text1"
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
@@ -36,13 +35,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
             android:text="TextView"
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView4"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
@@ -51,9 +49,8 @@
             android:layout_height="wrap_content"
             android:text="TextView"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/cotrol_recyview_itme_text2"
-            app:layout_constraintStart_toStartOf="@+id/cotrol_recyview_itme_textTitle"
-            app:layout_constraintTop_toTopOf="@+id/cotrol_recyview_itme_text2" />
+            app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+            app:layout_constraintStart_toStartOf="@+id/cotrol_recyview_itme_textTitle" />
 
         <TextView
             android:id="@+id/cotrol_recyview_itme_text3"
@@ -106,8 +103,8 @@
 
         <ImageView
             android:id="@+id/imageView4"
-            android:layout_width="70dp"
-            android:layout_height="0dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"

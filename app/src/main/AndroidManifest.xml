@@ -4,7 +4,26 @@
     package="com.blueview.led">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--相机-->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!--震动-->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!--存储-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
+        android:name=".Application.BlueViewApplication"
         android:hardwareAccelerated="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,17 +31,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="gVmRMV2kQIT8q1T6qd3xs64a4rGXUtft" />
         <activity
-            android:name=".ui.login.LoginActivity"
+            android:name=".UI.login.LoginActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity"/>
-        <activity android:name=".ui.ControlEqment.ControlEqmentActivity"/>
+        <activity android:name=".UI.ControlEqment.ControlEqmentActivity"/>
+        <activity android:name=".Util.ScanQRCodeActivity"
+            android:screenOrientation="fullSensor"
+            xmlns:tools="http://schemas.android.com/tools"
+            tools:replace="screenOrientation"/>
+        <activity android:name=".Search.SearchActivity"/>
+        <activity android:name="com.blueview.led.UI.Plan.PlanActivity"
+            tools:ignore="DuplicateActivity" />
+        <activity android:name=".UI.Plan.PlanItemView.PlanItemActivity"/>
     </application>
 
 </manifest>

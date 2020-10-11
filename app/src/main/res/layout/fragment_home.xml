@@ -3,7 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.blueview.led.ui.home.HomeFragment">
+    tools:context="com.blueview.led.UI.home.HomeFragment">
+
+    <com.blueview.led.Util.StatusBarHeightView
+        android:id="@+id/statusBarHeightView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:use_type="use_padding_top"
+        tools:ignore="MissingConstraints" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/home_tab_title"
@@ -11,7 +22,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/statusBarHeightView"
         app:tabIndicatorColor="@color/colorAccent"
         app:tabIndicatorFullWidth="false"
         app:tabIndicatorHeight="3dp"

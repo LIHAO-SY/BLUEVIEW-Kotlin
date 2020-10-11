@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.blueview.led.ui.map.MapFragment">
-
-<WebView
-    android:id="@+id/map_webview"
+    android:fitsSystemWindows="false"
+    tools:context="com.blueview.led.UI.map.MapFragment">
+<com.baidu.mapapi.map.MapView
+    android:id="@+id/MapView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
