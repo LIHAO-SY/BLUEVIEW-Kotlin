@@ -34,7 +34,7 @@ object TtsControl {
          */
 
         //注意：这里只是示例，请根据用户实际申请的 SecretId 和 SecretKey 进行后续操作！
-        mTtsController.init(context, 1259576303L, "AKIDEE9oDMnpebZHjtqQbWhmb9QcaLq5nlES", "5lFSUw83mKp54mdJktlPnukdGbfSvGME")
+        mTtsController.init(context, , "", "")
         requestAudioFocus(mTtsController)
 
         //设置语速
