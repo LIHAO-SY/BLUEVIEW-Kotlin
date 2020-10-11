@@ -31,10 +31,10 @@ object AudioRecognzie {
     fun AudioRecognzieInit(context: Context)
     {
         // 用户配置：需要在控制台申请相关的账号;
-        val appid = 1259576303
+        val appid = 
         val projectId = 0
-        val secretId = "AKIDEE9oDMnpebZHjtqQbWhmb9QcaLq5nlES"
-        val secretKey = "5lFSUw83mKp54mdJktlPnukdGbfSvGME"
+        val secretId = ""
+        val secretKey = ""
 
         val credentialProvider: AbsCredentialProvider = LocalCredentialProvider(secretKey)
 
